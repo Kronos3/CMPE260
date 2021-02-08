@@ -7,7 +7,13 @@
 % Packages
 \usepackage{amsmath}
 \usepackage[pdfborder={0 0 0},plainpages=false,pdfpagelabels]{hyperref}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{circuits.logic.IEC,calc}
 \def\code#1{\texttt{#1}}
+
+\makeatletter
+\newcommand\currentcoordinate{\the\tikz@lastxsaved,\the\tikz@lastysaved}
 
 % Document
 \begin{document}
@@ -36,6 +42,103 @@
     \subsection*{How many operands can be written to a MIPs register at a time?}
     One register can be written to at one time
 
+    \begin{figure}[!ht]
+        \centering
+        %! suppress = Ellipsis
+        \begin{circuitikz}[american, circuit logic IEC]
 
+            %\draw[step=1cm,gray,very thin] (-2,-2) grid (10,20);%just to help place nodes
+
+            \tikzset{mux8/.style={muxdemux,muxdemux def={Lh=8, NL=8, Rh=4, NB=1, w=1, square pins=0}}}
+            \tikzset{mux2/.style={muxdemux,muxdemux def={Lh=2, NL=2, Rh=2, NB=1, w=1, square pins=0}}}
+            \tikzset{register/.style={qfpchip,
+            hide numbers, num pins=8, external pins width=0}}
+
+            \def\RegMax{7};
+            \def\RegSpacing{1.8}
+            \def\RegYStart{10}
+
+            \def\RegPinLabels{
+                1/wd/right,
+                2/clk/right,
+                6/rd/left,
+                7/we/below};
+
+            \foreach \i in {0,...,\RegMax} {
+                \draw (5, -1 * \i * \RegSpacing + \RegYStart) node[register](R\i){R\i};
+
+                \foreach \pin/\pinname/\labelpos in \RegPinLabels {
+                    \node [\labelpos, font=\tiny] at (R\i.bpin \pin) {\pinname};
+                    \draw (R\i.bpin \pin) coordinate(R\i_\pinname);
+                }
+            }
+
+            % Draw the input nodes
+            \draw (0,0) coordinate(addr1);
+            \draw (0,-0.5) coordinate(addr2);
+            \draw (0, 4) coordinate(wdin);
+            \draw (1.4
+            , 12) coordinate(we);
+            \draw (addr1) to[font=\tiny, multiwire, l_=\code{LOG\_PORT\_DEPTH}] ++(-0.5,0) node [anchor=east]{Addr1};
+            \draw (addr2) to[multiwire] ++(-0.5,0) node [anchor=east]{Addr2};
+            \draw (wdin) to[font=\tiny, multiwire, l_=\code{BIT\_DEPTH}] ++(-0.5,0) node [anchor=east]{wd};
+            \draw (we) node [anchor=south]{we};
+
+            \node [mux8](muxRd1) at (9.5, 8) {};
+            \node [mux8](muxRd2) at (9.5, 2) {};
+
+            % Connect the rd of every register to the two RDout muxes
+            \def\MuxOffsetA{0.1}
+            \def\MuxOffsetB{0.4}
+            \def\WireSpacing{0.15}
+            \foreach \i [evaluate=\i as \pin using int(\i+1)] in {0,...,\RegMax} {
+                \draw (R\i_rd) -- ++(\MuxOffsetA + \i*\WireSpacing, 0) |- (muxRd1.lpin \pin);
+                \draw (muxRd1.lpin \pin) ++(-\MuxOffsetB - \WireSpacing*\i, 0)
+                        to [short, *-] (\currentcoordinate |- muxRd2.lpin \pin) -- (muxRd2.lpin \pin);
+            }
+
+            % Connect Addr1 and Addr2 to the Mux selects
+            \foreach \i in {1,...,2} {
+                \draw (addr\i) -| ++(2 - \WireSpacing*\i, -4) coordinate(addr\i_inter);
+            }
+            \draw (addr2_inter) -| (muxRd2.bpin 1);
+            \draw (addr1_inter) -- (\currentcoordinate -| muxRd2.bpin 1) -- ++(1, 0) |- (muxRd1.bpin 1);
+
+            % Connect the wd input to every data line for registers R0-R7
+            \draw (wdin) -- ++(3.8, 0) coordinate(wdconnect);
+            \foreach \i in {0,...,\RegMax} {
+                \draw (wdconnect) to [short, *-*] (\currentcoordinate |- R\i_wd) -- (R\i_wd);
+            }
+
+            % Draw a decoder and label the outputs
+            \def\RegWeSpace{0.2}
+            \def\AndWeOffset{0.2}
+
+            \node[and gate,inputs={nnn},and gate IEC symbol={Decoder},text height=5cm,text width=2cm] (A) at (0, 9) {};
+            \draw  ([xshift=-10pt]A.input 2) node[left] {Addr3} -- (A.input 2);
+            \foreach \C/\B [count=\i from 0] in {0.111/000,.222/001,.333/010,.444/011,.555/100,.666/101,.777/110,.888/111} {
+                \draw ( $ (A.north east)!\C!(A.south east) $ ) -- ++(10pt,0) node[left,xshift=-10] {$\B$} coordinate (decoder_\i);
+
+                % Place a corresponding AND gate
+                % Connect the inputs
+                \draw (decoder_\i) node[and port,scale=0.4, anchor=in 1] (and_we_\i) {};
+                \draw (and_we_\i.in 2) to [short, -*] (we |- \currentcoordinate);
+
+                % Connect the outputs
+                \draw (and_we_\i.out) -- ++(\AndWeOffset - \i*\WireSpacing + \RegMax*\WireSpacing, 0) coordinate(and_we_\i_out_real);
+                \draw (R\i_we) -- ++(0, \RegWeSpace) -| (and_we_\i_out_real);
+            }
+
+            \draw (we) |- (and_we_\RegMax.in 2);
+
+            % Connect the mux outputs to the Rd outputs
+            \foreach \i in {1,...,2} {
+                \draw (muxRd\i.rpin 1) -- ++(1.5, 0) to[font=\tiny, multiwire, l=\code{BIT\_DEPTH}] ++(0.5,0) node [anchor=west]{RD\i};
+            }
+
+        \end{circuitikz}
+        \caption{Register File block diagram}
+        \label{fig:register_file}
+    \end{figure}
 
 \end{document}
