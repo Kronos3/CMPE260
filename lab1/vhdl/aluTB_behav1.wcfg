@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="aluTB_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="aluTB" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="948001fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="232"></NameColumnWidth>
+      <ValueColumnWidth column_width="113"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject type="group" fp_name="group147">
+      <obj_property name="label">Generic Testcases</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/aluTB/A">
+         <obj_property name="ElementShortName">A[31:0]</obj_property>
+         <obj_property name="ObjectShortName">A[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/B">
+         <obj_property name="ElementShortName">B[31:0]</obj_property>
+         <obj_property name="ObjectShortName">B[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OR_Y">
+         <obj_property name="ElementShortName">OR_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">OR_Y[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/AND_Y">
+         <obj_property name="ElementShortName">AND_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">AND_Y[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/XOR_Y">
+         <obj_property name="ElementShortName">XOR_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">XOR_Y[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/SLL_Y">
+         <obj_property name="ElementShortName">SLL_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">SLL_Y[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/SRL_Y">
+         <obj_property name="ElementShortName">SRL_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">SRL_Y[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/SRA_Y">
+         <obj_property name="ElementShortName">SRA_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">SRA_Y[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group148">
+      <obj_property name="label">Edge Testcases</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/aluTB/EDGE_A">
+         <obj_property name="ElementShortName">EDGE_A[31:0]</obj_property>
+         <obj_property name="ObjectShortName">EDGE_A[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/EDGE_B">
+         <obj_property name="ElementShortName">EDGE_B[31:0]</obj_property>
+         <obj_property name="ObjectShortName">EDGE_B[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/EDGE_Y">
+         <obj_property name="ElementShortName">EDGE_Y[31:0]</obj_property>
+         <obj_property name="ObjectShortName">EDGE_Y[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OP_EDGE">
+         <obj_property name="ElementShortName">OP_EDGE[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_EDGE[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group149">
+      <obj_property name="label">Operators</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/aluTB/OP_OR">
+         <obj_property name="ElementShortName">OP_OR[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_OR[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OP_AND">
+         <obj_property name="ElementShortName">OP_AND[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_AND[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OP_XOR">
+         <obj_property name="ElementShortName">OP_XOR[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_XOR[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OP_SLL">
+         <obj_property name="ElementShortName">OP_SLL[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_SLL[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OP_SRL">
+         <obj_property name="ElementShortName">OP_SRL[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_SRL[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/aluTB/OP_SRA">
+         <obj_property name="ElementShortName">OP_SRA[3:0]</obj_property>
+         <obj_property name="ObjectShortName">OP_SRA[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="other" fp_name="/aluTB/N">
+      <obj_property name="ElementShortName">N</obj_property>
+      <obj_property name="ObjectShortName">N</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/aluTB/delay">
+      <obj_property name="ElementShortName">delay</obj_property>
+      <obj_property name="ObjectShortName">delay</obj_property>
+   </wvobject>
+</wave_config>

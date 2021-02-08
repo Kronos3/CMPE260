@@ -1,0 +1,39 @@
+%! Author = tumbar
+%! Date = 1/31/21
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage[pdfborder={0 0 0},plainpages=false,pdfpagelabels]{hyperref}
+\def\code#1{\texttt{#1}}
+
+% Document
+\begin{document}
+    \section*{Lab 2 prelab}
+    Andrei Tumbar
+
+    \subsection*{What is Assembly Language?}
+    Assembly Language is the human readable representation of machine instructions.
+    Unlike high level programming languages, assembly language only includes three main functors:
+    Instructions, Registers, and Constants.
+
+    \subsection*{In the assembly code sub a,b,c, which operand is the destination?}
+    In MIPS assembly, the instruction \code{sub a,b,c} will place \code{b - c} into \code{a}.
+    In every MIPS instruction, destination is first.
+    
+    \subsection*{Why are operands stored in registers?}
+    Operands are stored in registers to allow operations to be performed quickly on arbitrary data
+    instead of having to always read from memory.
+
+    \subsection*{This lab creates 8 registers. How many registers does a MIPs have?}
+    There are 32 registers in a MIPs processor.
+    
+    \subsection*{How many operands can be read from a MIPs register at a time?}
+    A maximum of 2 registers can be read at one time
+    
+    \subsection*{How many operands can be written to a MIPs register at a time?}
+    One register can be written to at one time
+
+\end{document}
