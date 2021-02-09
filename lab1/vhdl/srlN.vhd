@@ -14,7 +14,7 @@ library IEEE ;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 entity srlN is
-GENERIC ( N : INTEGER := 32) ; --bit width
+GENERIC ( N : INTEGER := 4) ; --bit width
 PORT (
     A : IN std_logic_vector (N-1 downto 0);
     SHIFT_AMT : IN std_logic_vector (N-1 downto 0);
@@ -32,5 +32,5 @@ begin
         end generate right_fill ;
     end generate generateSRL ;
     Y <= aSRL ( to_integer ( unsigned ( SHIFT_AMT ) ) ) when
-        (to_integer(unsigned(SHIFT_AMT)) < N) else ( others => A(N-1));
+        (to_integer(unsigned(SHIFT_AMT)) < N) else ( others => '0');
 end behavioral;
