@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+    \title{\textbf{Homework 2}}
+    \author{Andrei Tumbar}
+    \date{}
+    
+    \addtolength{\topmargin}{-3cm}
+    \addtolength{\textheight}{3cm}
+
+\usepackage{circuitikzgit}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{lmodern}
+\usepackage{siunitx}
+
+\usepackage{amsmath}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{ <-> mathx10 }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{\mathalpha}{mathx}{"73}
+
+\makeatletter
+\newcommand{\cwidebar}[2][0]{{\mathpalette\@cwidebar{{#1}{#2}}}}
+\newcommand{\@cwidebar}[2]{\@cwideb@r{#1}#2}
+\newcommand{\@cwideb@r}[3]{%
+  \sbox\z@{$\m@th#1\mkern-#2mu#3\mkern#2mu$}%
+  \widebar{\box\z@}%
+}
+\makeatother
+
+\usetikzlibrary{circuits.logic.IEC,calc}
+
+\setlength{\parindent}{0pt}
+\newcommand*\xor{\oplus}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section*{Question 1}
+\begin{equation}
+f = (\widebar{x_1}\widebar{x_2}x_3) + (\widebar{x_1}x_2\widebar{x_3}) + (x_1\widebar{x_2}\widebar{x_3}) + (x_1x_2x_3)
+\end{equation}
+
+\begin{table}[h]
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{12pt}
+\caption{Truth table for equation 1}
+\begin{center}
+\begin{tabular}{|c|c|c||c|}\hline
+$x_1$ & $x_2$ & $x_3$ & Value\\\hline
+0 & 0 & 0 & 0 \\\hline
+0 & 0 & 1 & 1 \\\hline
+0 & 1 & 0 & 1 \\\hline
+0 & 1 & 1 & 0 \\\hline
+1 & 0 & 0 & 1 \\\hline
+1 & 0 & 1 & 0 \\\hline
+1 & 1 & 0 & 0 \\\hline
+1 & 1 & 1 & 1 \\\hline
+\end{tabular}
+\end{center}
+\label{tab:TRUTH}
+\end{table}
+
+If this circuit was implemented as a CMOS gate, it would take $46$ transistors.
+Each triple AND/OR gates take 8 transistors. Each invertor takes 2 transistors.
+$8*5 + 2*3 = 46$ 
+ 
+\section*{Question 3}
+\begin{equation}
+f = x_1 \xor x_2 \xor x_3
+\end{equation}
+This is logically equivalent to the truth table in question 1. The output $f$ is 
+true when an odd number of inputs are HIGH. This is the same as a 3-input XOR gate.
+
+\pagebreak
+
+\ctikzset{logic ports=ieee}
+
+\section*{Question 5}
+\begin{figure}[!ht]
+        \centering
+        %! suppress = Ellipsis
+        \begin{circuitikz}[circuit logic IEC]
+        
+        \foreach \i in {1,...,4} {
+            \draw (0, 2*\i) node (nor\i) [ieeestd nor port] {};
+        }
+        
+        \draw (3, 7) node(nand1) [nand port] {};
+        \draw (nor4.out) -- ++(0.3, 0) |- (nand1.in 1);
+        \draw (nor3.out) -- ++(0.3, 0) |- (nand1.in 2);
+
+        \draw (3, 3) node(nand2) [nand port] {};
+        \draw (nor2.out) -- ++(0.3, 0) |- (nand2.in 1);
+        \draw (nor1.out) -- ++(0.3, 0) |- (nand2.in 2);
+
+        \draw (6, 5) node(nand3) [nand port] {};
+        \draw (nand1.out) -- ++(0.3, 0) |- (nand3.in 1);
+        \draw (nand2.out) -- ++(0.3, 0) |- (nand3.in 2);
+        
+        \end{circuitikz}
+\end{figure}
+
+
+Each 2 input NOR/NAND gate takes 4 transistors. There are 4 NOR gates and 3 
+NAND gates meaning there are $4*7$ or $28$ transistors total.
+
+\end{document}
+
