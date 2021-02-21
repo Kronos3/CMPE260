@@ -42,18 +42,18 @@ constant test_vector_array : test_array := (
 	(we => '1', Addr1 => "001", Addr2 => "000", Addr3 => "010", wd => x"ff", RD1 => x"10", RD2 => x"00"),
 	(we => '0', Addr1 => "001", Addr2 => "010", Addr3 => "001", wd => x"10", RD1 => x"10", RD2 => x"ff"),
 	(we => '1', Addr1 => "001", Addr2 => "000", Addr3 => "000", wd => x"ff", RD1 => x"10", RD2 => x"00"),
-	(we => '0', Addr1 => "001", Addr2 => "000", Addr3 => "010", wd => x"ff", RD1 => x"10", RD2 => x"ff"),
-	(we => '1', Addr1 => "001", Addr2 => "000", Addr3 => "010", wd => x"ab", RD1 => x"10", RD2 => x"ff"),
-	(we => '0', Addr1 => "001", Addr2 => "010", Addr3 => "000", wd => x"00", RD1 => x"10", RD2 => x"ab"),
-	(we => '1', Addr1 => "001", Addr2 => "000", Addr3 => "111", wd => x"bc", RD1 => x"10", RD2 => x"ff"),
-	(we => '0', Addr1 => "001", Addr2 => "111", Addr3 => "000", wd => x"00", RD1 => x"10", RD2 => x"bc"),
+	(we => '0', Addr1 => "001", Addr2 => "000", Addr3 => "010", wd => x"ff", RD1 => x"10", RD2 => x"00"),
+	(we => '1', Addr1 => "001", Addr2 => "001", Addr3 => "010", wd => x"ab", RD1 => x"10", RD2 => x"10"),
+	(we => '1', Addr1 => "001", Addr2 => "010", Addr3 => "110", wd => x"ef", RD1 => x"10", RD2 => x"ab"),
+	(we => '1', Addr1 => "001", Addr2 => "110", Addr3 => "111", wd => x"bc", RD1 => x"10", RD2 => x"ef"),
+	(we => '0', Addr1 => "001", Addr2 => "111", Addr3 => "000", wd => x"00", RD1 => x"10", RD2 => x"bc")
 	);
 
 component RegisterFile is
-	GENERIC(
-		BIT_DEPTH : integer := 32;
-		LOG_PORT_DEPTH : integer := 5
-	);
+	--GENERIC(
+	--	BIT_DEPTH : integer := BIT_DEPTH;
+	--	LOG_PORT_DEPTH : integer := LOG_PORT_DEPTH
+	--);
 	PORT (
 	------------ INPUTS ---------------
 		clk_n	: in std_logic;
@@ -81,10 +81,10 @@ signal RD2		: std_logic_vector(BIT_DEPTH-1 downto 0); --Read from Addr2
 begin
 
 UUT : RegisterFile
-	generic map (
-		BIT_DEPTH  => BIT_DEPTH,
-		LOG_PORT_DEPTH  => LOG_PORT_DEPTH
-	)
+	--generic map (
+	--	BIT_DEPTH  => BIT_DEPTH,
+	--	LOG_PORT_DEPTH  => LOG_PORT_DEPTH
+	--)
 	port map (
 	------------ INPUTS ---------------
 		clk_n	 => clk_n,
@@ -108,19 +108,22 @@ end process;
 
 stim_proc:process
 begin
+    wait for 10ns; -- Create an offset from the clock
 	for i in 0 to num_tests-1 loop
 		we <= test_vector_array(i).we;
 		Addr1 <= test_vector_array(i).Addr1;
 		Addr2 <= test_vector_array(i).Addr2;
 		Addr3 <= test_vector_array(i).Addr3;
 		wd <= test_vector_array(i).wd;
-		wait for 60 ns;
+		wait for 60 ns; -- Half a cycle
 
 		-- Make sure the output from the read operations are correct
 		assert  RD1 = test_vector_array(i).RD1
 			and RD2 = test_vector_array(i).RD2
 			report "Invalid output"
 			severity failure;
+			
+	   wait for 40 ns; -- Wait for the rest of the cycle
 	end loop;
 
 	-- Stop testbench once done testing
