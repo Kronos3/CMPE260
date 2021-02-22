@@ -11,6 +11,13 @@
 \RequirePackage{multicol} %Make columns
 \RequirePackage[margin=1in]{geometry} %Change margins
 \RequirePackage[most]{tcolorbox}  % For the "RIT" box on EEEE cover
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\fontsize{14}{15}\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesubsection}{1em}{}
 
 \setlength{\parindent}{0pt} % Don't indent paragraphs
 
