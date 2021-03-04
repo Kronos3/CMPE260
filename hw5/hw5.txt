@@ -1,0 +1,19 @@
+Andrei Tumbar
+CMPE260 HW5
+
+1. Write VHDL code to represent:
+   F = MIN_TERMS(0, 2, 3, 4, 5, 6, 7)
+
+   with a select b <=
+    '0' when "001",
+    '1' when others;
+
+2. Write VHDL code to represent:
+    F = MIN_TERMS(1, 2, 3, 5, 6)
+
+    with a select b <=
+      '0' when "000",
+      '0' when "100",
+      '0' when "111",
+      '1' when others;
+

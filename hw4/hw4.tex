@@ -1,0 +1,193 @@
+\documentclass[11pt]{article}
+    \title{\textbf{Homework 4}}
+    \author{Andrei Tumbar}
+    \date{02-24-2021}
+
+\usepackage{circuitikzgit}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{lmodern}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage[left=1in, right=1in, bottom=0in]{geometry}
+
+%XeLaTeX packages
+\usepackage{xltxtra}
+\usepackage{fontspec} %Font package
+\usepackage{xunicode}
+\usepackage{inconsolata}
+
+\setmonofont{inconsolata}
+
+\addtolength{\topmargin}{-.875in}
+
+\usepackage{amsmath}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{ <-> mathx10 }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{\mathalpha}{mathx}{"73}
+
+\makeatletter
+\newcommand{\cwidebar}[2][0]{{\mathpalette\@cwidebar{{#1}{#2}}}}
+\newcommand{\@cwidebar}[2]{\@cwideb@r{#1}#2}
+\newcommand{\@cwideb@r}[3]{%
+  \sbox\z@{$\m@th#1\mkern-#2mu#3\mkern#2mu$}%
+  \widebar{\box\z@}%
+}
+\makeatother
+
+\usetikzlibrary{circuits.logic.IEC,calc}
+
+\setlength{\parindent}{0pt}
+\newcommand*\xor{\oplus}
+\def\code#1{\texttt{#1}}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+
+\ctikzset{tripoles/pmos style/emptycircle}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section*{6.10}
+
+Convert the following instructions into machine language.
+
+\begin{lstlisting}
+add $t0, $s0, $s1
+lw $t0, 0x20($t7)
+addi $s0, $0, -10
+\end{lstlisting}
+
+\begin{lstlisting}
+000000|10000|10001|01000|00000|100000
+100011|01111|01000|0000000000100000
+001000|00000|10000|1111111111110110
+\end{lstlisting}
+
+\section*{6.12}
+\subsection*{Which instructions from Exercise 6.10 are I-type instructions?}
+
+The \code{lw} and \code{addi} instructions are I-type instructions.
+
+\subsection*{Sign-extend the 16-bit immediate of each instruction from part (a) so that it becomes a 32-bit number.}
+\begin{lstlisting}
+(16-bit)         (32-bit)
+0x0020       -> 0x00000020
+-10 (0xff06) -> 0xffffff06
+\end{lstlisting}
+
+\subsection*{6.14}
+\begin{lstlisting}[language=C]
+(hex) 0x20080000
+(bin) 001000|00000|01000|0000000000000000
+(MIPS) addi $t0, $0, 0x0000
+
+(hex) 0x20090001 
+(bin) 001000|00000|01001|0000000000000001
+(MIPS) addi $t1, $0, 0x0001
+
+(hex) 0x0089502A
+(bin) 000000|00100|01001|01010|00000|101010
+(MIPS) slt $t2, $a0, $t1
+
+(hex) 0x15400003
+(bin) 000101|01010|00000|0000000000000011
+(MIPS) bne $t2, $0, 0x0003
+
+(hex) 0x01094020
+(bin) 000000|01000|01001|01000|00000|100000
+(MIPS) add $t0, $t0, $t1
+
+(hex) 0x21290002
+(bin) 001000|01001|01001|0000000000000010
+(MIPS) addi $t1, $t1, 0x0002
+
+(hex) 0x08100002
+(bin) 000010|00,0001,0000,0000,0000,0000,0010
+(addr) 0000|0000|0100|0000|0000|0000|0000|1000
+(MIPS) j 0x0100002 (0x00400008)
+
+(hex) 0x01001020
+(bin) 000000|01000|00000|00010|00000|100000
+(MIPS) add $v0, $t0, $0
+
+(hex) 0x03E00008
+(bin) 000000|11111|00000|00000|00000|001000
+(MIPS) jr $ra
+
+
+int f(int n)
+{
+    int t0 = 0;
+
+    for (int t1 = 1; t1 < n; t1 += 2)
+    {
+        t0 += t1;
+    }
+
+    return t0;
+}
+
+\end{lstlisting}
+
+This program will sum up all of the odd numbers that are less
+than the input \code{n} and return this value.
+
+\section*{Question 6.1}
+Write assembly code to swap two registers.
+
+\begin{lstlisting}
+; Swap registers $t0 and $t1
+xor $t0, $t0, $t1
+xor $t1, $t1, $t0
+xor $t0, $t0, $t1
+\end{lstlisting}
+
+\section*{Final Question}
+Show all relevant data and control values on Harris figure 7.11 for commands
+\begin{lstlisting}
+add  $t0, $s0, $s1
+addi $s0, $0, -10
+\end{lstlisting}
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{12pt}
+\caption{Relevant data values}
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|}\hline
+Instruction & \code{A1} & \code{A2} & \code{A3} & \code{SignImm} \\\hline
+\code{add \$t0, \$s0, \$s1} & \code{10000} & \code{10001} & \code{01000} & N/A\\\hline
+\code{addi \$s0, \$0, -10} & \code{00000} & N/A & \code{01000} & \code{0xfffffff6}\\\hline
+\end{tabular}
+\end{center}
+\label{tab:TRUTH}
+\end{table}
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{12pt}
+\caption{Relevant control values}
+\begin{center}
+\begin{tabular}{|c||c|c|c|c|c|c|}\hline
+Instruction & \code{MemToReg} & \code{MemWrite} & \code{Branch} & \code{ALUSrc} & \code{RegDst} & \code{RegWrite} \\\hline
+\code{add \$t0, \$s0, \$s1} & \code{0} & \code{0} & \code{0} & \code{0} & \code{0} & \code{1} \\\hline
+\code{addi \$s0, \$0, -10} & \code{0} & \code{0} & \code{0} & \code{1} & \code{0} & \code{1} \\\hline
+\end{tabular}
+\end{center}
+\label{tab:TRUTH}
+\end{table}
+
+\end{document}
+

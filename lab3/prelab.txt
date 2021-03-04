@@ -1,0 +1,18 @@
+Prelab for Lab 3
+Andrei Tumbar
+
+Question 1:
+The instruction fetch stage in the MIPS processor will read
+from instruction memory at the program counter PC. The fetch
+will then pass the instruction to the instruction decoder
+so that the instruction may be run. The instruction fetch
+will not write to any memory (only read).
+
+Question 2:
+The instruction decode stage will take an instruction from
+the instruction fetch stage and break down the portions of
+the instruction. These pieces will be passed to various parts
+of the processor to control different portions. For example,
+the ALU and register file have various control parameters.
+The decode stage will also control whether or not output data
+is written to a register or to memory or not at all.
