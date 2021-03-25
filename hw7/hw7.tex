@@ -1,0 +1,196 @@
+\documentclass[11pt]{article}
+    \title{\textbf{Homework 7}}
+    \author{Andrei Tumbar}
+    \date{02-24-2021}
+
+\usepackage{circuitikzgit}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{lmodern}
+\usepackage{makecell}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{kmap}
+\usepackage[left=1in, right=1in, bottom=0in]{geometry}
+
+%XeLaTeX packages
+\usepackage{xltxtra}
+\usepackage{fontspec} %Font package
+\usepackage{xunicode}
+\usepackage{inconsolata}
+
+\setmonofont{inconsolata}
+
+\addtolength{\topmargin}{-.875in}
+
+\usepackage{amsmath}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{ <-> mathx10 }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{\mathalpha}{mathx}{"73}
+
+\makeatletter
+\newcommand{\cwidebar}[2][0]{{\mathpalette\@cwidebar{{#1}{#2}}}}
+\newcommand{\@cwidebar}[2]{\@cwideb@r{#1}#2}
+\newcommand{\@cwideb@r}[3]{%
+  \sbox\z@{$\m@th#1\mkern-#2mu#3\mkern#2mu$}%
+  \widebar{\box\z@}%
+}
+\newcommand\currentcoordinate{\the\tikz@lastxsaved,\the\tikz@lastysaved}
+\makeatother
+
+\usetikzlibrary{circuits.logic.IEC,calc}
+
+\setlength{\parindent}{0pt}
+\newcommand*\xor{\oplus}
+\def\code#1{\texttt{#1}}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\ctikzset{logic ports=ieee}
+\ctikzset{tripoles/pmos style/emptycircle}
+\tikzset{dff/.style={flipflop, flipflop def={
+    t1=D, t2=clk, t6=Q, nd=1}},
+}
+\ctikzset{
+        logic ports/scale=0.7,
+}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section*{Problem 9}
+Create a circuit that outputs \code{1} if four consecutive inputs are equal.
+
+\begin{figure}[h!]
+    \centering
+    %! suppress = Ellipsis
+    \begin{circuitikz}[american, ]
+
+	% Third and final set
+	\draw (0, 0)
+			node[ieeestd xnor port, scale=0.8](xnor_1) {};
+	\draw (xnor_1.in 1) -- ++(-0.2, 0)
+				node[label={[font=\footnotesize]left:$w_1$}] {}
+			
+			(xnor_1.in 2) -- ++(-0.2, 0)
+				node[label={[font=\footnotesize]left:$w_2$}] {}
+			;
+	
+
+    \draw (xnor_1.out) -- ++(0.2, 0) coordinate(I1)
+    		node[flipflop D, scale=0.7, anchor=pin 1](D1){};
+    \draw (D1.pin 6) -- ++(0.2, 0) coordinate(I2)
+    		node[flipflop D, scale=0.7, anchor=pin 1](D2){};
+    \draw (D2.pin 6) -- ++(0.2, 0) coordinate(I3)
+    		node[flipflop D, scale=0.7, anchor=pin 1](D3){};
+    \draw (D3.pin 6) -- ++(0.2, 0) coordinate(I4);
+    
+    \draw (I1) ++(0.9, 1.5)
+			node[ieeestd and port, scale=0.8, rotate=90](or_1) {};
+    \draw (I3) ++(0.9, 1.5)
+			node[ieeestd and port, scale=0.8, rotate=90](or_2) {};
+    
+    \draw (I1) to [short, *-] (or_1.in 1 -| \currentcoordinate) -- (or_1.in 1);
+    \draw (I2) to [short, *-] (or_1.in 2 -| \currentcoordinate) -- (or_1.in 2);
+
+    \draw (I3) to [short, *-] (or_2.in 1 -| \currentcoordinate) -- (or_2.in 1);
+    \draw (I4) to [short, -] (or_2.in 2 -| \currentcoordinate) -- (or_2.in 2);
+    
+    \draw (or_1.out)
+    		node[ieeestd and port, scale=0.8, rotate=90, anchor=in 1](out_and){};
+    \draw (or_2.out) -| (out_and.in 2);
+    
+    \draw (out_and.out)
+				node[label={[font=\footnotesize]above:$z$}] {};
+
+    \end{circuitikz}
+    \caption{Circuit which compares two numbers and outputs a \code{1} if they are equal for four consecutive clocks.}
+    \label{fig:block}
+\end{figure}
+
+The comparison is done via a \code{XNOR} gate which will output a \code{1} if the 
+two inputs are equal. The previous 3 comparisons will be held in the D-flip-flop.
+All of the previous comparisons as well as the current comparison must be true
+in order to produce a high output.
+
+\section*{Problem 10}
+(See VHDL file)
+
+\pagebreak
+\section*{Exercise 22}
+This FSM will output a \code{1} if the sequence \code{AB} is seen in the input.
+It will always output \code{0} otherwise.
+
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.2}
+    % \setlength{\tabcolsep}{12pt}
+    \caption{State-transistion and output table}
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            Input & State & Next State & Output\\\hline
+            \hline
+            $A$ & \code{00} & \code{01} & \code{0}\\\hline
+            $\widebar{A}$ & \code{00} & \code{00} & \code{0}\\\Xhline{4\arrayrulewidth}
+            
+            $B$ & \code{01} & \code{10} & \code{0}\\\hline
+            $\widebar{B}$ & \code{01} & \code{00} & \code{0}\\\Xhline{4\arrayrulewidth}
+            
+             & \code{10} & \code{00} & \code{1}\\\hline
+        \end{tabular}
+    \end{center}
+    \label{tab:decode}
+\end{table}
+
+\begin{figure}[h!]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\begin{Karnaugh}{$Q_1$$Q_0$}{AB}
+				\contingut{0,0,0,0,
+						   0,1,0,0,
+						   0,0,0,0,
+						   0,1,0,0}
+		   \implicant{5}{13}{yellow}
+		\end{Karnaugh}
+		\caption{K-map for ${Q_1}^{\prime}$}
+		\label{fig:sop}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\begin{Karnaugh}{$Q_1$$Q_0$}{AB}
+				\contingut{0,0,0,0,
+						   0,0,0,0,
+						   1,0,0,0,
+						   1,0,0,0}
+		   \implicant{12}{8}{red}
+		\end{Karnaugh}
+		\caption{K-map for ${Q_0}^{\prime}$}
+		\label{fig:pos}
+	\end{subfigure}
+	
+	
+	
+	\caption{K-Map for Exercise-22 state machine}
+	\label{fig:kmap}
+\end{figure}
+
+\begin{align*}
+Y &= Q_1\widebar{Q_0}\\
+{Q_1}^{\prime} &= \widebar{Q_1}Q_0B\\
+{Q_0}^{\prime} &= \widebar{Q_0}\widebar{Q_0}A
+\end{align*}
+
+\end{document}
+

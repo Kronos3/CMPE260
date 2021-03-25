@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+    \title{\textbf{Homework 8}}
+    \author{Andrei Tumbar}
+    \date{02-25-2021}
+
+\usepackage{circuitikzgit}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{lmodern}
+\usepackage{makecell}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{kmap}
+\usepackage[left=1in, right=1in, bottom=0in]{geometry}
+
+%XeLaTeX packages
+\usepackage{xltxtra}
+\usepackage{fontspec} %Font package
+\usepackage{xunicode}
+\usepackage{inconsolata}
+
+\setmonofont{inconsolata}
+
+\addtolength{\topmargin}{-.875in}
+
+\usepackage{amsmath}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{ <-> mathx10 }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{\mathalpha}{mathx}{"73}
+
+\makeatletter
+\newcommand{\cwidebar}[2][0]{{\mathpalette\@cwidebar{{#1}{#2}}}}
+\newcommand{\@cwidebar}[2]{\@cwideb@r{#1}#2}
+\newcommand{\@cwideb@r}[3]{%
+  \sbox\z@{$\m@th#1\mkern-#2mu#3\mkern#2mu$}%
+  \widebar{\box\z@}%
+}
+\newcommand\currentcoordinate{\the\tikz@lastxsaved,\the\tikz@lastysaved}
+\makeatother
+
+\usetikzlibrary{circuits.logic.IEC,calc}
+
+\setlength{\parindent}{0pt}
+\newcommand*\xor{\oplus}
+\def\code#1{\texttt{#1}}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\ctikzset{logic ports=ieee}
+\ctikzset{tripoles/pmos style/emptycircle}
+\tikzset{dff/.style={flipflop, flipflop def={
+    t1=D, t2=clk, t6=Q, nd=1}},
+}
+\ctikzset{
+        logic ports/scale=0.7,
+}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section*{Exercise 2}
+\begin{figure}[h!]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\begin{Karnaugh}{$a(0)$$a(1)$}{$a(2)$$a(3)$}
+				\contingut{0,1,1,1,
+						   0,1,1,1,
+						   0,1,1,1,
+						   0,1,1,1}
+		   \implicant{1}{11}{green}
+		   \implicant{3}{10}{blue}
+		\end{Karnaugh}
+		\caption{K-map for ${y_1}$}
+		\label{fig:sop}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\begin{Karnaugh}{$a(0)$$a(1)$}{$a(2)$$a(3)$}
+				\contingut{0,0,1,1,
+						   0,0,1,1,
+						   1,0,1,1,
+						   1,0,1,1}
+		   \implicant{3}{10}{yellow}
+		   \implicantcostats{12}{10}{red}
+		\end{Karnaugh}
+		\caption{K-map for ${y_0}$}
+		\label{fig:pos}
+	\end{subfigure}
+	
+	
+	
+	\caption{K-Map for Exercise-2}
+	\label{fig:kmap}
+\end{figure}
+
+\begin{align*}
+y_1 &= a_0 + a_1\\
+y_0 &= a_0 + \widebar{a_1}a_2
+\end{align*}
+
+
+\begin{figure}[h!]
+    \centering
+    %! suppress = Ellipsis
+    \begin{circuitikz}[american, ]
+
+	% Third and final set
+	\draw (0, 0)
+			node[ieeestd or port, scale=0.8](y1_or) {};
+	\draw (y1_or.in 1)
+			node[label={[font=\footnotesize]left:$a_0$}] {}
+		(y1_or.in 2)
+			node[label={[font=\footnotesize]left:$a_1$}] {}
+		(y1_or.out)
+			node[label={[font=\footnotesize]right:$y_1$}] {}
+		;
+	
+	\draw (0, -2)
+		node[ieeestd and port, scale=0.8](y0_and) {};
+	\draw (y0_and.in 1)
+				node[ieeestd not port, scale=0.7, anchor=out](inv){}
+			(inv.in)
+				node[label={[font=\footnotesize]left:$a_1$}] {}
+			(y0_and.in 2) -- ++(0, -0.2) to[short, -] (inv.in |- \currentcoordinate)
+				node[label={[font=\footnotesize]left:$a_2$}] {}
+			;
+	\draw (y0_and.out) -| ++(0.2, -0.5)
+		node[ieeestd or port, scale=0.8, anchor=in 1](y0_or){}
+		(y0_or.in 2)
+			to[short, -] (inv.in |- \currentcoordinate)
+			node[label={[font=\footnotesize]left:$a_0$}] {}
+		(y0_or.out)
+			node[label={[font=\footnotesize]right:$y_0$}] {}
+		;
+
+    \end{circuitikz}
+    \label{fig:block}
+\end{figure}
+
+\end{document}
+

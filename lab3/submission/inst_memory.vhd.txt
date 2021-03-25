@@ -1,0 +1,81 @@
+----------------------------------------------------------------------------------
+-- 
+-- Company: RIT
+-- Engineer: Andrei Tumbar
+-- 
+----------------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.all;
+
+entity InstructionMemory is
+  generic (BYTE_N : integer := 1024;
+           ADDR_DEPTH : integer := 28);
+  Port (addr  : in std_logic_vector(ADDR_DEPTH-1 downto 0);
+        d_out : out std_logic_vector(31 downto 0)
+  );
+  
+end InstructionMemory;
+
+architecture Behavioral of InstructionMemory is
+    -- We want 1024 bytes in our memory
+    -- If there is an out of range index, we output zeroes
+    type memory_type is array(0 to BYTE_N-1) of std_logic_vector(7 downto 0);
+    
+    -- Initialize the memory the same
+    -- way that the TB expects it
+    signal memory : memory_type := (
+        0 => x"11",
+        1 => x"11",
+        2 => x"11",
+        3 => x"11",
+        
+        4 => x"22",
+        5 => x"22",
+        6 => x"22",
+        7 => x"22",
+       
+        8 => x"1f",
+        9 => x"2e",
+       10 => x"3d",
+       11 => x"4c",
+       
+       12 => x"aa",
+       13 => x"aa",
+       14 => x"aa",
+       15 => x"aa",
+       
+       16 => x"bb",
+       17 => x"bb",
+       18 => x"bb",
+       19 => x"bb",
+       
+       20 => x"cc",
+       21 => x"cc",
+       22 => x"cc",
+       23 => x"cc",
+       
+       24 => x"dd",
+       25 => x"dd",
+       26 => x"dd",
+       27 => x"dd",
+       
+       28 => x"ee",
+       29 => x"ee",
+       30 => x"ee",
+       31 => x"ee",
+       others => (others => '0'));
+begin
+    out_proc: process (addr)
+    begin
+        if (unsigned(addr) < BYTE_N) then
+            d_out <= memory(to_integer(unsigned(addr)))
+                   & memory(to_integer(unsigned(addr)) + 1)
+                   & memory(to_integer(unsigned(addr)) + 2)
+                   & memory(to_integer(unsigned(addr)) + 3);
+        else
+            d_out <= x"00000000";
+        end if;
+    end process;
+end Behavioral;

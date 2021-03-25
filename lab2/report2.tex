@@ -7,7 +7,7 @@
 \newcommand{\classCode}{CMPE 260}  % 4 char code with number
 \newcommand{\name}{Andrei Tumbar}
 \newcommand{\LabSectionNum}{1}
-\newcommand{\LabInstructor}{Moskal}    % The slash is to tell LaTeX that the period is between words
+\newcommand{\LabInstructor}{Moskal}	% The slash is to tell LaTeX that the period is between words
 % not sentences so it spaces correctly. It won't appear in the
 % final pdf
 \newcommand{\TAs}{Jacob Meyerson}
@@ -23,6 +23,7 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{circuits.logic.IEC,calc}
 \usepackage{multirow}
+\usepackage{titlesec}
 \usepackage{float}
 \usepackage{lmodern}
 \usepackage{siunitx}
@@ -74,7 +75,7 @@
     failures tripped an assertion failure.
 
     \section*{Design Methodology}
-
+    
     A block diagram of a 3-bit \code{LOG\_PORT\_DEPTH} 8-bit \code{BIT\_DEPTH}
     register was created to simplify the design of the generic parameter
     register file.
@@ -131,7 +132,7 @@
             \foreach \i [evaluate=\i as \pin using int(\i+1)] in {0,...,\RegMax} {
                 \draw (R\i_rd) -- ++(\MuxOffsetA + \i*\WireSpacing, 0) |- (muxRd1.lpin \pin);
                 \draw (muxRd1.lpin \pin) ++(-\MuxOffsetB - \WireSpacing*\i, 0)
-                to [short, *-] (\currentcoordinate |- muxRd2.lpin \pin) -- (muxRd2.lpin \pin);
+                        to [short, *-] (\currentcoordinate |- muxRd2.lpin \pin) -- (muxRd2.lpin \pin);
             }
 
             % Connect Addr1 and Addr2 to the Mux selects
@@ -160,7 +161,7 @@
                 % Connect the inputs
                 \draw (decoder_\i) node[and port,scale=0.4, anchor=in 1] (and_we_\i) {};
                 \draw (and_we_\i.in 2) to [short, -*] (we |- \currentcoordinate)
-                coordinate(weconn_\i);
+                     coordinate(weconn_\i);
 
                 % Connect the outputs
                 \draw (and_we_\i.out) -- ++(\AndWeOffset - \i*\WireSpacing + \RegMax*\WireSpacing, 0) coordinate(and_we_\i_out_real);
@@ -179,13 +180,13 @@
         \label{fig:block}
     \end{figure}
 
-    Each register in figure \ref{fig:block} work with 3 input signals. When
-    the \code {we} signal is \code{HIGH}, the \code{wd} bus will be written to
-    the register. The \code {clk} signal will drive the D-flip-flops inside the
-    register that are used as memory. This signal is falling-edge driven.
-    The register output signal \code{rd} will output the contents of the register
-    on a falling-edge of the clock signal.
-    \\
+	Each register in figure \ref{fig:block} work with 3 input signals. When
+	the \code {we} signal is \code{HIGH}, the \code{wd} bus will be written to
+	the register. The \code {clk} signal will drive the D-flip-flops inside the
+	register that are used as memory. This signal is falling-edge driven.
+	The register output signal \code{rd} will output the contents of the register
+	on a falling-edge of the clock signal.    
+\\
 
     Figure \ref{fig:block} shows a block diagram of a register file with 8 registers. \code{Addr1} and \code{Addr2} control the data in the outputs
     \code{RD1} and \code{RD2}.
@@ -194,8 +195,8 @@
     The \code{Addr3} input will control which register to write to when \code{we}
     (write enable) is \code{HIGH}.
     The data written to the selected register will be the \code{wd}.
-    \\
-
+\\ 
+ 
     This register file can be implemented in VHDL by creating a table
     (array of arrays).
     The number of columns will be controlled by generic parameter
@@ -204,12 +205,12 @@
     The number of registers is controlled by the \code{LOG\_PORT\_DEPTH} which is
     number of bits to address a single register.
     Therefore the number of registers will be $2^{LOG\_PORT\_DEPTH}$.
-
+    
     The zero register \code{R0} is designed to not be writable and always output
     \code{0} when read from.
 
     \section*{Results \& Analysis}
-    To test the VHDL source code, a test-bench was written to analyse the
+    To test the VHDL source code, a test-bench was written to analyse the 
     behaviour of the circuit and all of its operations. A table was created
     with inputs and expected outputs. The expected were checked against simulation
     outputs to verify the fidelity of the register file implementation.
@@ -227,129 +228,115 @@
 
     Figure \ref{fig:behave} shows the waveforms generated from running a behavioural simulation of the VHDL
     test-bench.
-    A table illustrating the inputs and outputs used to test the register
-    was generated.
-
-    \begin{table}[H]
-        \renewcommand{\arraystretch}{1.2}
-        \setlength{\tabcolsep}{12pt}
-        \caption{Test cases used to test register file implementation}
-        \begin{center}
-            \begin{tabular}{|c|c|c|c|c||c|c|}
-                \hline
-                \code{Addr1} & \code{Addr2} & \code{Addr3} & \code{we} & \code{wd} & \code{RD1} & \code{RD2}\\\hline
-                \hline
-                \code{000} & \code{000} & \code{001} & \code{0} & \code{0x10} & \code{0x00} & \code{0x00} \\\hline
-                \code{000} & \code{000} & \code{001} & \code{1} & \code{0x10} & \code{0x00} & \code{0x00} \\\hline
-                \code{001} & \code{000} & \code{010} & \code{1} & \code{0xff} & \code{0x10} & \code{0x00} \\\hline
-                \code{001} & \code{010} & \code{001} & \code{0} & \code{0x10} & \code{0x10} & \code{0xff} \\\hline
-                \code{001} & \code{000} & \code{000} & \code{1} & \code{0xff} & \code{0x10} & \code{0x00} \\\hline
-                \code{001} & \code{000} & \code{010} & \code{0} & \code{0xff} & \code{0x10} & \code{0x00} \\\hline
-                \code{001} & \code{001} & \code{010} & \code{1} & \code{0xab} & \code{0x10} & \code{0x10} \\\hline
-                \code{001} & \code{010} & \code{110} & \code{1} & \code{0xef} & \code{0x10} & \code{0xab} \\\hline
-                \code{001} & \code{110} & \code{111} & \code{1} & \code{0xbc} & \code{0x10} & \code{0xef} \\\hline
-                \code{001} & \code{111} & \code{000} & \code{0} & \code{0x00} & \code{0x10} & \code{0xbc} \\\hline
-            \end{tabular}
-        \end{center}
-        \label{tab:testcases}
-    \end{table}
-
-    Looking at read addresses (\code{Addr1} and \code{Addr2}) in
-    Table \ref{tab:testcases}, whenever the address is \code{0}, the
-    resulting read value is \code{0x00}.
-    This meets the design specification as the zero-register should not
-    be able to be written to and should always output \code{0}.
-    Looking at the other test-cases, because they are run sequentially,
-    the values of the registers hold the correct values after a write
-    operation occurs.
-
-    Following the passing of all of the register file test cases, a
-    post-synthesis timing waveform was generated.
-
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=\textwidth]{img/synthesis-timing}
-        \caption{Post-synthesis timing simulation}
-        \label{fig:synth}
-    \end{figure}
-
-    The post-synthesis timing simulation uses the same test cases as the
-    behavioural simulation.
-    No assertion failure was tripped meaning that the results were valid.
-    \\
-
-    Following the post-synthesis timing simulation, a post-implementation
-    timing simulation was performed to test the design for the Baysis 3
-    FPGA.
-
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=\textwidth]{img/synthesis-timing}
-        \caption{Post-implementation timing simulation}
-        \label{fig:impl}
-    \end{figure}
-
-    To map the pins to real IO pins on the Baysis board, a constraints
-    file was written to map input pins to input signals in the register
-    files.
-    Output signals were mapped to LEDs.
-
-    \section*{Conclusion}
-    This laboratory exercise introduced the concept of the register file
-    and implemented a generically sized register file.
-    The register file could read from two registers at once and write
-    to one register when enabled.
-    Behavioural and timing simulations were performed while also asserting
-    the output from the simulation to verify integrity.
-    This exercise was successful as a working implementation was created
-    meeting all of the hardware specifications of the register file.
+    
+    (we => '0', Addr1 => "000", Addr2 => "000", Addr3 => "001", wd => x"10", RD1 => x"00", RD2 => x"00"),
+›   (we => '1', Addr1 => "000", Addr2 => "000", Addr3 => "001", wd => x"10", RD1 => x"00", RD2 => x"00"),
+›   (we => '1', Addr1 => "001", Addr2 => "000", Addr3 => "010", wd => x"ff", RD1 => x"10", RD2 => x"00"),
+›   (we => '0', Addr1 => "001", Addr2 => "010", Addr3 => "001", wd => x"10", RD1 => x"10", RD2 => x"ff"),
+›   (we => '1', Addr1 => "001", Addr2 => "000", Addr3 => "000", wd => x"ff", RD1 => x"10", RD2 => x"00"),
+›   (we => '0', Addr1 => "001", Addr2 => "000", Addr3 => "010", wd => x"ff", RD1 => x"10", RD2 => x"00"),
+›   (we => '1', Addr1 => "001", Addr2 => "001", Addr3 => "010", wd => x"ab", RD1 => x"10", RD2 => x"10"),
+›   (we => '1', Addr1 => "001", Addr2 => "010", Addr3 => "110", wd => x"ef", RD1 => x"10", RD2 => x"ab"),
+›   (we => '1', Addr1 => "001", Addr2 => "110", Addr3 => "111", wd => x"bc", RD1 => x"10", RD2 => x"ef"),
+›   (we => '0', Addr1 => "001", Addr2 => "111", Addr3 => "000", wd => x"00", RD1 => x"10", RD2 => x"bc")
 
     \pagebreak
 
+    Following the behavioural simulation, a Post-Implementation Timing simulation was performed.
+    A corresponding waveform was generated.
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\textwidth]{img/synthesis-timing}
+        \caption{Screen capture of timing simulation in 32-bits}
+        \label{fig:timing}
+    \end{figure}
+
+    The simulation test-bench is identical to the one shown in Figure \ref{fig:behave}.
+    In this simulation, the gate delays associated with the Baysis 3 FPGA were taken into account.
+    The output signals are seen to change values several nano-seconds after the inputs change.
+
+    \subsection*{Testcases}
+    There are two sets of testcases provided in simulations shown in Figure \ref{fig:behave} and \ref{fig:timing}.
+    The first set labeled generic testcases are a set of four different inputs run on every operation.
+    The ALU operations are all run in parallel and shown an different signals.
+    The \code{B} input on all four of these test cases is always chosen to be low so that the shift operations
+    will not overflow.
+    Two of the \code{A} inputs are chosen such that the most significant bit is \code{1} so that the difference between
+    \code{SRL} and \code{SRA} may be tested.
+    The right shift operations can be seen to work properly as the arithmetic shift correctly fills the left bits with
+    \code{1} and the logic shift fill these bits with \code{0}.
+    All other operations show expected results.
+
+    The second set of testcases labeled edge cases are a set of special input/output/operation combinations used to
+    verify the fidelity of each implemented operation.
+    These operations provide additional spot checking to verify the ALU implementation.
+
+    \section*{Conclusion}
+    This laboratory exercise revisited the basic of VHDL to create a six function ALU with \code{OR}, \code{XOR},
+    \code{AND}, \code{SLL}, \code{SRL}, \code{SRA} operations.
+    A test-bench was created to verify the output signals generated by the synthesized ALU module.
+    This exercise was successful as all of the expected outputs were generated as well as reasonable timing delays
+    during the timing simulation for the Baysis 3 FPGA.
+
+    \pagebreak
     \section*{Demo results}
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=\textwidth]{img/behaviour}
-        \caption{Behavioural simulation of register file}
+        %\includegraphics[width=\textwidth]{img/behaviour_4}
+        \caption{Behavioural simulation 4-bits}
         %! suppress = FigureNotReferenced
         \label{fig:demo1}
     \end{figure}
 
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=\textwidth]{img/synthesis-timing}
+        %\includegraphics[width=\textwidth]{img/post_synthesis_time_4}
         \caption{Post-synthesis timing simulation}
         %! suppress = FigureNotReferenced
         \label{fig:demo2}
     \end{figure}
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=\textwidth]{img/schematic}
+        %\includegraphics[width=\textwidth]{img/rtl_4_schem}
         \caption{Synthesis Schematic}
         %! suppress = FigureNotReferenced
         \label{fig:demo3}
     \end{figure}
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=\textwidth]{img/implementation-timing}
-        \caption{Post-Implementation Timing simulation}
+        %\includegraphics[width=\textwidth]{img/util_4}
+        \caption{Synthesis Utilization Report}
         %! suppress = FigureNotReferenced
         \label{fig:demo4}
     \end{figure}
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=\textwidth]{img/utilization-report}
-        \caption{Implementation Utilization Report}
+        %\includegraphics[width=\textwidth]{img/timing_4}
+        \caption{Post-Implementation Timing simulation}
         %! suppress = FigureNotReferenced
         \label{fig:demo5}
     \end{figure}
     \begin{figure}[h!]
         \centering
-        \includegraphics
-        {img/bitstream}
-        \caption{Screen-capture of successful bitstream generation}
+        %\includegraphics[width=\textwidth]{img/srl_schem}
+        \caption{SRL Schematic diagram}
         %! suppress = FigureNotReferenced
         \label{fig:demo6}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        %\includegraphics[width=\textwidth]{img/behaviour_32}
+        \caption{Behavioural simulation 32-bits}
+        %! suppress = FigureNotReferenced
+        \label{fig:demo7}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        %\includegraphics[width=\textwidth]{img/timing_32}
+        \caption{Post-Implementation Timing simulation 32-bits}
+        %! suppress = FigureNotReferenced
+        \label{fig:demo8}
     \end{figure}
 
 \end{document}
