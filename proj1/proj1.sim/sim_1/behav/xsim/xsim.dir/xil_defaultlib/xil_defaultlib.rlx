@@ -1,0 +1,23 @@
+0.7
+2020.2
+Nov 18 2020
+09:20:35
+/home/atuser/git/CMPE260/proj1/proj1.srcs/sim_1/new/mips_tb_b.vhd,1619909860,vhdl,,,,mips_tb_b,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/alu4.vhd,1619132411,vhdl,,,,alu4,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/fa.vhd,1619132461,vhdl,,,,fa,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/mult.vhd,1619132467,vhdl,,,,mult,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/ripple_carry.vhd,1619132473,vhdl,,,,ripple_carry,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/sllN.vhd,1619132411,vhdl,,,,slln,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/sraN.vhd,1619132411,vhdl,,,,sran,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/alu/srlN.vhd,1619132411,vhdl,,,,srln,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/control_unit.vhd,1619132532,vhdl,,,,controlunit,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/data_memory.vhd,1619884795,vhdl,,,,datamemory,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/execute_stage.vhd,1619878992,vhdl,,,,executestage,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/inst_decode.vhd,1619132532,vhdl,,,,instructiondecode,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/inst_fetch.vhd,1619904498,vhdl2008,,,,instructionfetch,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/inst_memory.vhd,1619909001,vhdl,,,,instructionmemory,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/memory_stage.vhd,1619876925,vhdl,,,,memorystage,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/mips.vhd,1619890874,vhdl,,,,mips,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/mips_tb_a.vhd,1619900603,vhdl2008,,,,mips_tb_a,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/register_file.vhd,1619889253,vhdl,,,,registerfile,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/writeback_stage.vhd,1619884646,vhdl,,,,writebackstage,,,,,,,,

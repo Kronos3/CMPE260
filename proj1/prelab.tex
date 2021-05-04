@@ -1,0 +1,65 @@
+%! Author = tumbar
+%! Date = 1/31/21
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage[pdfborder={0 0 0},plainpages=false,pdfpagelabels]{hyperref}
+\usepackage{tikz}
+\usepackage{circuitikzgit}
+\usepackage{xifthen}
+\usetikzlibrary{circuits.logic.IEC,calc}
+\def\code#1{\texttt{#1}}
+
+\makeatletter
+\newcommand\currentcoordinate{\the\tikz@lastxsaved,\the\tikz@lastysaved}
+
+% Document
+\begin{document}
+	\ctikzset{logic ports=ieee}
+
+    \section*{Project 1 prelab}
+    Andrei Tumbar
+
+    \begin{figure}[h!]
+        \centering
+        %! suppress = Ellipsis
+        \begin{circuitikz}[american,]
+
+		\ctikzset{multipoles/dipchip/width=1.5}
+		\draw (0,0) node[dipchip,
+			num pins=6, hide numbers, no topmark,
+			external pins width=0, anchor=bpin 3](F){Fetch};
+		\draw (F.bpin 1) ++(0,0.1) -- ++(0.1,-0.1)
+			node[right, font=\tiny]{CLK} -- ++(-0.1,-0.1);
+		\draw (F.bpin 3) node[right, font=\tiny]{Addr};
+		\draw (F.bpin 4) node[left, font=\tiny]{Instr};
+
+		\ctikzset{multipoles/dipchip/width=1.5}
+		\draw (4,0) node[dipchip,
+			num pins=16, hide numbers, no topmark,
+			external pins width=0, anchor=bpin 3](D){Decode};
+		\draw (D.bpin 1) ++(0,0.1) -- ++(0.1,-0.1)
+			node[right, font=\tiny]{CLK} -- ++(-0.1,-0.1);
+		\draw (D.bpin 3) node[left, font=\tiny]{Instr};
+		\draw (D.bpin 7) node[left, font=\tiny]{RegWrite};
+		\draw (D.bpin 5) node[left, font=\tiny]{WriteData};
+		\draw (D.bpin 6) node[left, font=\tiny]{WriteEn};
+
+		\draw (D.bpin 9) node[right, font=\tiny{RegWrite};
+		\draw (D.bpin 10) node[right, font=\tiny]{MemToReg};
+		\draw (D.bpin 11) node[right, font=\tiny]{MemWrite};
+		\draw (D.bpin 12) node[right, font=\tiny]{ALUControl};
+		\draw (D.bpin 13) node[right, font=\tiny]{ALUControl};
+		\draw (D.bpin 14) node[right, font=\tiny]{ALUControl};
+
+        \end{circuitikz}
+        \caption{}
+        \label{fig:block}
+    \end{figure}
+    
+    
+
+\end{document}

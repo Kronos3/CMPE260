@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1619971570">
+  <File Type="VDS-TIMING-PB" Name="mips_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="mips_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="mips.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="mips_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="mips_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="mips_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="mips.vds"/>
+  <File Type="REPORTS-TCL" Name="mips_reports.tcl"/>
+  <File Type="PA-TCL" Name="mips.tcl"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/alu4.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/alu4.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/control_unit.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/control_unit.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/data_memory.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/data_memory.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/execute_stage.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/execute_stage.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/fa.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/fa.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/inst_decode.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/inst_decode.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/inst_fetch.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/inst_fetch.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/inst_memory.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/inst_memory.vhd"/>
+        <Attr Name="ImportTime" Val="1619964092"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/memory_stage.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/memory_stage.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/mult.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/mult.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/register_file.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/register_file.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/ripple_carry.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/ripple_carry.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/sllN.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/sllN.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/sraN.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/sraN.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/alu/srlN.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/alu/srlN.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/writeback_stage.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/writeback_stage.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/srcs/mips.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/srcs/mips.vhd"/>
+        <Attr Name="ImportTime" Val="1619962579"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/proj2/proj2.mem">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/proj2.mem"/>
+        <Attr Name="ImportTime" Val="1619963167"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="mips"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/new/mips.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
+    <Step Id="synth_design"/>
+  </Strategy>
+</GenRun>

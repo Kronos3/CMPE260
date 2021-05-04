@@ -1,0 +1,5 @@
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Failure: Testbench Concluded
+Time: 539155 ps  Iteration: 0  Process: /mips_tb_a/mips_proc  File: /home/atuser/git/CMPE260/proj2/proj2.srcs/sim_1/imports/srcs/mips_tb_a.vhd
+$finish called at time : 539155 ps : File "/home/atuser/git/CMPE260/proj2/proj2.srcs/sim_1/imports/srcs/mips_tb_a.vhd" Line 217

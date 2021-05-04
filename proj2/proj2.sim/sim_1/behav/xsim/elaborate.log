@@ -1,0 +1,46 @@
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: /mnt/stor/vivado/Vivado/2020.2/bin/unwrapped/lnx64.o/xelab -wto 7049982a8bd442d0a31420497bd05d2c --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot mips_tb_a_behav xil_defaultlib.mips_tb_a xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package unisim.vcomponents
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_signed
+Compiling package ieee.vital_timing
+Compiling package ieee.vital_primitives
+Compiling package unisim.vpkg
+Compiling package ieee.std_logic_textio
+Compiling module xil_defaultlib.glbl
+Compiling architecture bufg_v of entity unisim.BUFG [bufg_default]
+Compiling architecture ibuf_v of entity unisim.IBUF [\IBUF(1,9)(1,1)(1,4)(1,7)\]
+Compiling architecture mmcme2_adv_v of entity unisim.MMCME2_ADV [\MMCME2_ADV(clkfbout_mult_f=49.8...]
+Compiling architecture structure of entity xil_defaultlib.clk_wiz_0_clk_wiz_0_clk_wiz [clk_wiz_0_clk_wiz_0_clk_wiz_defa...]
+Compiling architecture structure of entity xil_defaultlib.clk_wiz_0 [clk_wiz_0_default]
+Compiling architecture behavioral of entity xil_defaultlib.InstructionMemory [instructionmemory_default]
+Compiling architecture behavioral of entity xil_defaultlib.InstructionFetch [instructionfetch_default]
+Compiling architecture behavioral of entity xil_defaultlib.ControlUnit [controlunit_default]
+Compiling architecture behavioral of entity xil_defaultlib.RegisterFile [\RegisterFile(bit_depth=32,log_p...]
+Compiling architecture behavioral of entity xil_defaultlib.InstructionDecode [instructiondecode_default]
+Compiling architecture behavioral of entity xil_defaultlib.sllN [slln_default]
+Compiling architecture behavioral of entity xil_defaultlib.sraN [sran_default]
+Compiling architecture behavioral of entity xil_defaultlib.srlN [\srlN(n=32)\]
+Compiling architecture behavioral of entity xil_defaultlib.fa [fa_default]
+Compiling architecture behavioral of entity xil_defaultlib.ripple_carry [ripple_carry_default]
+Compiling architecture behavioral of entity xil_defaultlib.mult [mult_default]
+Compiling architecture structural of entity xil_defaultlib.alu4 [alu4_default]
+Compiling architecture behavioral of entity xil_defaultlib.ExecuteStage [executestage_default]
+Compiling architecture behavioral of entity xil_defaultlib.DataMemory [datamemory_default]
+Compiling architecture behavioral of entity xil_defaultlib.MemoryStage [memorystage_default]
+Compiling architecture behavioral of entity xil_defaultlib.WritebackStage [writebackstage_default]
+Compiling architecture behavioral of entity xil_defaultlib.mips [mips_default]
+Compiling architecture behavioral of entity xil_defaultlib.mips_tb_a
+Built simulation snapshot mips_tb_a_behav

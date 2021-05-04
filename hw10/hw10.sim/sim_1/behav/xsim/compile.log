@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/atuser/git/CMPE260/hw10/exercise_2_26.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exercise_2_26
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/atuser/git/CMPE260/hw10/exercise_16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exercise_16

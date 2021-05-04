@@ -1,0 +1,393 @@
+
+\documentclass{article}
+    \title{\textbf{Homework 12}}
+    \author{Andrei Tumbar}
+    \date{04-28-2021}
+
+
+\usepackage{circuitikzgit}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{lmodern}
+\usepackage{makecell}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{kmap}
+\usepackage[left=1in, right=1in, bottom=0in]{geometry}
+
+%XeLaTeX packages
+\usepackage{xltxtra}
+\usepackage{fontspec} %Font package
+\usepackage{xunicode}
+\usepackage{inconsolata}
+
+\setmonofont{inconsolata}
+
+\addtolength{\topmargin}{-.875in}
+
+\usepackage{amsmath}
+
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{ <-> mathx10 }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widebar}{\mathalpha}{mathx}{"73}
+
+\makeatletter
+\newcommand{\cwidebar}[2][0]{{\mathpalette\@cwidebar{{#1}{#2}}}}
+\newcommand{\@cwidebar}[2]{\@cwideb@r{#1}#2}
+\newcommand{\@cwideb@r}[3]{%
+  \sbox\z@{$\m@th#1\mkern-#2mu#3\mkern#2mu$}%
+  \widebar{\box\z@}%
+}
+\newcommand\currentcoordinate{\the\tikz@lastxsaved,\the\tikz@lastysaved}
+\makeatother
+
+\usetikzlibrary{circuits.logic.IEC,calc}
+
+\setlength{\parindent}{0pt}
+\newcommand*\xor{\oplus}
+\def\code#1{\texttt{#1}}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\ctikzset{logic ports=ieee}
+\ctikzset{tripoles/pmos style/emptycircle}
+\tikzset{dff/.style={flipflop, flipflop def={
+    t1=D, t2=clk, t6=Q, nd=1}},
+}
+\ctikzset{
+        logic ports/scale=0.7,
+}
+
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\tikzset{
+  ROMdot/.pic={
+    \begin{scope}
+    \fill (0,0) circle [radius=1mm];
+    \end{scope}
+  }
+}
+
+\newcommand*{\xMin}{0}%
+\newcommand*{\xMax}{10}%
+\newcommand*{\yMinA}{-15}%
+\newcommand*{\yMinB}{-7}%
+\newcommand*{\yMax}{0}%
+\newcommand*{\topLabels}{
+	A,$\widebar{A}$,
+	B,$\widebar{B}$,
+	C,$\widebar{C}$,
+	D,$\widebar{D}$,
+	\textbf{X},\textbf{Y},\textbf{Z}}
+
+\section*{Exercise 5.51}
+
+\begin{center}
+\begin{tikzpicture}
+	
+	\foreach \topname [count=\i from 0] in \topLabels {
+		\draw [very thin,gray] (\i,\yMinA) -- (\i,\yMax+1);
+		\draw node [above] at (\i,\yMax+1) {\i}
+			node [above] at (\i,\yMax+2) {\topname};
+	}
+    \foreach \i[evaluate=\i as \xi using int(\yMax-\i)] in {\yMinA,...,\yMax} {
+        \draw [very thin,gray] (\xMin,\i) -- (\xMax,\i);
+        \draw node [left] at (\xMin-0.5,\i) {$\xi$};
+    }
+
+	\draw (7.5,2) -- (7.5,\yMinA-0.5);
+
+	\draw
+		(1,0) pic{ROMdot}
+		(3,0) pic{ROMdot}
+		(5,0) pic{ROMdot}
+		(7,0) pic{ROMdot}
+		(1,-1) pic{ROMdot}
+		(3,-1) pic{ROMdot}
+		(5,-1) pic{ROMdot}
+		(6,-1) pic{ROMdot}
+		(1,-2) pic{ROMdot}
+		(3,-2) pic{ROMdot}
+		(4,-2) pic{ROMdot}
+		(7,-2) pic{ROMdot}
+		(1,-3) pic{ROMdot}
+		(3,-3) pic{ROMdot}
+		(4,-3) pic{ROMdot}
+		(6,-3) pic{ROMdot}
+		(1,-4) pic{ROMdot}
+		(2,-4) pic{ROMdot}
+		(5,-4) pic{ROMdot}
+		(7,-4) pic{ROMdot}
+		(1,-5) pic{ROMdot}
+		(2,-5) pic{ROMdot}
+		(5,-5) pic{ROMdot}
+		(6,-5) pic{ROMdot}
+		(1,-6) pic{ROMdot}
+		(2,-6) pic{ROMdot}
+		(4,-6) pic{ROMdot}
+		(7,-6) pic{ROMdot}
+		(1,-7) pic{ROMdot}
+		(2,-7) pic{ROMdot}
+		(4,-7) pic{ROMdot}
+		(6,-7) pic{ROMdot}
+		(0,-8) pic{ROMdot}
+		(3,-8) pic{ROMdot}
+		(5,-8) pic{ROMdot}
+		(7,-8) pic{ROMdot}
+		(0,-9) pic{ROMdot}
+		(3,-9) pic{ROMdot}
+		(5,-9) pic{ROMdot}
+		(6,-9) pic{ROMdot}
+		(0,-10) pic{ROMdot}
+		(3,-10) pic{ROMdot}
+		(4,-10) pic{ROMdot}
+		(7,-10) pic{ROMdot}
+		(0,-11) pic{ROMdot}
+		(3,-11) pic{ROMdot}
+		(4,-11) pic{ROMdot}
+		(6,-11) pic{ROMdot}
+		(0,-12) pic{ROMdot}
+		(2,-12) pic{ROMdot}
+		(5,-12) pic{ROMdot}
+		(7,-12) pic{ROMdot}
+		(0,-13) pic{ROMdot}
+		(2,-13) pic{ROMdot}
+		(5,-13) pic{ROMdot}
+		(6,-13) pic{ROMdot}
+		(0,-14) pic{ROMdot}
+		(2,-14) pic{ROMdot}
+		(4,-14) pic{ROMdot}
+		(7,-14) pic{ROMdot}
+		(0,-15) pic{ROMdot}
+		(2,-15) pic{ROMdot}
+		(4,-15) pic{ROMdot}
+		(6,-15) pic{ROMdot}
+  	;
+  	
+  	% Or up the results of X
+  \draw (8,-12) pic{ROMdot} % AB
+  		(8,-13) pic{ROMdot} % AB
+  		(8,-14) pic{ROMdot} % AB
+  		(8,-15) pic{ROMdot} % AB
+  		
+  		% B(not C)D
+  		(8,-5) pic{ROMdot} 
+  		(8,-13) pic{ROMdot}
+  		
+  		% (not A)(not B)
+  		(8,0) pic{ROMdot}
+  		(8,-1) pic{ROMdot}
+  		(8,-2) pic{ROMdot}
+  		(8,-3) pic{ROMdot}
+  ;
+  	
+  	% Or up the results of Y
+  \draw % AB
+  		(9,-12) pic{ROMdot}
+  		(9,-13) pic{ROMdot}
+  		(9,-14) pic{ROMdot}
+  		(9,-15) pic{ROMdot}
+  		
+  		% BD
+  		(9,-5) pic{ROMdot}
+  		(9,-7) pic{ROMdot} 
+  		(9,-13) pic{ROMdot}
+  		(9,-15) pic{ROMdot}
+  ;
+  	
+  	% Or up the results of Z
+  \draw
+  		(10,-1) pic{ROMdot}
+  		(10,-2) pic{ROMdot} 
+  		(10,-3) pic{ROMdot}
+  		(10,-4) pic{ROMdot}
+  		(10,-5) pic{ROMdot}
+  		(10,-6) pic{ROMdot}
+  		(10,-7) pic{ROMdot}
+  		(10,-8) pic{ROMdot}
+  		(10,-9) pic{ROMdot}
+  		(10,-10) pic{ROMdot}
+  		(10,-11) pic{ROMdot}
+  		(10,-12) pic{ROMdot}
+  		(10,-13) pic{ROMdot}
+  		(10,-14) pic{ROMdot}
+  		(10,-15) pic{ROMdot}
+  ;
+
+\end{tikzpicture}
+\end{center}
+
+\section*{Exercise 5.52}
+
+\begin{center}
+\begin{tikzpicture}
+	
+	\foreach \topname [count=\i from 0] in \topLabels {
+		\draw [very thin,gray] (\i,\yMinB) -- (\i,\yMax+1);
+		\draw node [above] at (\i,\yMax+1) {\i}
+			node [above] at (\i,\yMax+2) {\topname};
+	}
+    \foreach \i[evaluate=\i as \xi using int(\yMax-\i)] in {\yMinB,...,\yMax} {
+        \draw [very thin,gray] (\xMin,\i) -- (\xMax,\i);
+        \draw node [left] at (\xMin-0.5,\i) {$\xi$};
+    }
+
+	\draw (7.5,2) -- (7.5,\yMinB-0.5);
+
+	% AB
+  \draw (0,0) pic{ROMdot} % A
+  		(2,0) pic{ROMdot} % B
+  ;
+  
+  % B(not C)D
+  \draw (2,-1) pic{ROMdot} % B
+  		(5,-1) pic{ROMdot} % not C
+  		(6,-1) pic{ROMdot} % D
+  ;
+  
+  % (not A)(not B)
+  \draw (1,-2) pic{ROMdot} % not A
+  		(3,-2) pic{ROMdot} % not B
+  ;
+  
+  % BD
+  \draw (2,-3) pic{ROMdot} % B
+  		(6,-3) pic{ROMdot} % D
+  ;
+  
+  \draw (0,-4) pic{ROMdot}; % A
+  \draw (2,-5) pic{ROMdot}; % B
+  \draw (4,-6) pic{ROMdot}; % C
+  \draw (6,-7) pic{ROMdot}; % D
+
+  % Or up the results of X
+  \draw (8,0) pic{ROMdot}
+  		(8,-1) pic{ROMdot}
+  		(8,-2) pic{ROMdot}
+  ;
+  
+  % Or up the results of Y
+  \draw (9,-0) pic{ROMdot}
+  		(9,-3) pic{ROMdot}
+  ;
+  
+  % Or up the results of Z
+  \draw (10,-4) pic{ROMdot}
+  		(10,-5) pic{ROMdot}
+  		(10,-6) pic{ROMdot}
+  		(10,-7) pic{ROMdot}
+  ;
+\end{tikzpicture}
+\end{center}
+
+\section*{Exercise 5.53}
+
+Size of ROM to implement function
+
+\subsection*{16-bit adder/subtractor with $C_{in}$ and $C_{out}$}
+Two 16-bit inputs and a carry-in: 33 inputs.
+8589934592 x 17
+
+\subsection*{8x8 multipier}
+Two 8 bit inputs, 16-bit output.
+65536 x 16
+
+\subsection*{16-bit priority encoder}
+Can encode 4 numbers.
+65536 x 4
+
+\section*{Explanation}
+These are impractical to implement with a ROM because there
+is LOTS of redundancy in the ROM grid. These grids are far
+larger than they would be with more efficient reprogrammable
+logic options.
+
+
+\pagebreak
+\section*{Exercise 5.55}
+
+\begin{table}[H]
+    \renewcommand{\arraystretch}{1.2}
+    \caption{LUT4 logic elements required to implement the functions.}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            Function & LE\\\hline
+            \hline
+            Exercise 2.13(c) & 1\\\hline
+            Exercise 2.17(c) & 1\\\hline
+            the two-output function from Exercise 2.24 & 2\\\hline
+            the function from Exercise 2.35 & 2\\\hline
+            a four-input priority encoder (see Exercise 2.36) & 2\\\hline
+        \end{tabular}
+    \end{center}
+    \label{tab:decode}
+\end{table}
+
+\tikzset{
+  LUT/.pic={
+    \begin{scope}
+    \draw (-0.5,1) rectangle (0.5,-1);
+    \end{scope}
+  }
+}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}
+	
+	\draw (0,0) coordinate(A) pic{LUT}
+		(0,0) ++(-0.5,0.75) node[left]{A}
+		(0,0) ++(-0.5,0.25)node[left]{B}
+		(0,0) ++(-0.5,-0.25)node[left]{C}
+		(0,0) ++(-0.5,-0.75)node[left]{D}
+		(0,0) ++(0.5,0)node[right]{Y};
+	\draw (A) ++(0,1) node[above] {LUT for 1 and 2};
+	
+	\draw (3,0) pic{LUT} coordinate(B)
+		(B) ++(-0.5,0.75) node[left]{A}
+		(B) ++(-0.5,0.25)node[left]{B}
+		(B) ++(-0.5,-0.25)node[left]{C}
+		(B) ++(-0.5,-0.75)node[left]{D}
+		(B) ++(0.5,0)node[right]{Y};
+	\draw (B) ++(1,1) node[above] {LUTs for 3 and 4};
+	
+	\draw (5.5,0) pic{LUT} coordinate(C)
+		(C) ++(-0.5,0.75) node[left]{A}
+		(C) ++(-0.5,0.25)node[left]{B}
+		(C) ++(-0.5,-0.25)node[left]{C}
+		(C) ++(-0.5,-0.75)node[left]{D}
+		(C) ++(0.5,0)node[right]{Z};
+	
+	\draw (0,-3) pic{LUT} coordinate(D1)
+		(D1) ++(-0.5,0.75) node[left]{A}
+		(D1) ++(-0.5,0.25)node[left]{B}
+		(D1) ++(-0.5,-0.25)node[left]{C}
+		(D1) ++(-0.5,-0.75)node[left]{D}
+		(D1) ++(0.5,0)node[right]{$Y_0$};
+	\draw (3,-3) pic{LUT} coordinate(D2)
+		(D2) ++(-0.5,0.75) node[left]{A}
+		(D2) ++(-0.5,0.25)node[left]{B}
+		(D2) ++(-0.5,-0.25)node[left]{C}
+		(D2) ++(-0.5,-0.75)node[left]{D}
+		(D2) ++(0.5,0)node[right]{$Y_1$};
+	\draw (D1) ++(2,1) node[above] {LUTs for priority encoder};
+
+\end{tikzpicture}
+\end{center}
+\caption{LUT configurations from Table 1}
+\end{figure}
+
+\end{document}
+

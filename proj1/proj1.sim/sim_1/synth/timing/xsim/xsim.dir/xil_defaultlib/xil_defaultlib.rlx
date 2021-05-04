@@ -1,0 +1,6 @@
+0.7
+2020.2
+Nov 18 2020
+09:20:35
+/home/atuser/git/CMPE260/proj1/proj1.sim/sim_1/synth/timing/xsim/mips_tb_a_time_synth.v,1619900355,verilog,,,,DataMemory;ExecuteStage;InstructionDecode;InstructionFetch;MemoryStage;RegisterFile;WritebackStage;glbl;mips,,,,,,,,
+/home/atuser/git/CMPE260/proj1/srcs/mips_tb_a.vhd,1619898666,vhdl2008,,,,mips_tb_a,,,,,,,,

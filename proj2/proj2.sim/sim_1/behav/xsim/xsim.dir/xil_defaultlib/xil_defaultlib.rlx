@@ -1,0 +1,25 @@
+0.7
+2020.2
+Nov 18 2020
+09:20:35
+/home/atuser/git/CMPE260/proj2/proj2.ip_user_files/ip/clk_wiz_0/clk_wiz_0.v,1619966832,verilog,,,,clk_wiz_0,,,../../../../proj2.srcs/sources_1/ip/clk_wiz_0,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.ip_user_files/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v,1619966832,verilog,,/home/atuser/git/CMPE260/proj2/proj2.ip_user_files/ip/clk_wiz_0/clk_wiz_0.v,,clk_wiz_0_clk_wiz,,,../../../../proj2.srcs/sources_1/ip/clk_wiz_0,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sim_1/imports/srcs/mips_tb_a.vhd,1619965947,vhdl,,,,mips_tb_a,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/alu4.vhd,1619962579,vhdl,,,,alu4,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/fa.vhd,1619962579,vhdl,,,,fa,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/mult.vhd,1619962579,vhdl,,,,mult,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/ripple_carry.vhd,1619962579,vhdl,,,,ripple_carry,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/sllN.vhd,1619962579,vhdl,,,,slln,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/sraN.vhd,1619962579,vhdl,,,,sran,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/alu/srlN.vhd,1619962579,vhdl,,,,srln,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/control_unit.vhd,1619962579,vhdl,,,,controlunit,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/data_memory.vhd,1619962579,vhdl,,,,datamemory,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/execute_stage.vhd,1619962579,vhdl,,,,executestage,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/inst_decode.vhd,1619962579,vhdl,,,,instructiondecode,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/inst_fetch.vhd,1619962579,vhdl,,,,instructionfetch,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/inst_memory.vhd,1619964092,vhdl,,,,instructionmemory,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/memory_stage.vhd,1619962579,vhdl,,,,memorystage,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/mips.vhd,1619962579,vhdl,,,,mips,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/register_file.vhd,1619962579,vhdl,,,,registerfile,,,,,,,,
+/home/atuser/git/CMPE260/proj2/proj2.srcs/sources_1/imports/proj2/srcs/writeback_stage.vhd,1619962579,vhdl,,,,writebackstage,,,,,,,,

@@ -1,0 +1,23 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/alu4.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/control_unit.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/data_memory.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/execute_stage.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/fa.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/inst_decode.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/inst_fetch.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/inst_memory.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/memory_stage.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/mips.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/mult.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/register_file.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/ripple_carry.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/sllN.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/sraN.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/alu/srlN.vhd" \
+"../../../../proj2.srcs/sources_1/imports/proj2/srcs/writeback_stage.vhd" \
+"../../../../proj2.srcs/sim_1/imports/srcs/mips_tb_a.vhd" \
+
+# Do not sort compile order
+nosort

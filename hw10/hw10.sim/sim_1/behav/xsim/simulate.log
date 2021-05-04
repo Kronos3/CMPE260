@@ -1,0 +1,4 @@
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Loading expected values and input data
+$finish called at time : 40 ns : File "/home/atuser/git/CMPE260/hw10/exercise_16.v" Line 37

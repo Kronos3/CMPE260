@@ -1,0 +1,32 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../srcs/alu/alu4.vhd" \
+"../../../../srcs/control_unit.vhd" \
+"../../../../srcs/data_memory.vhd" \
+"../../../../srcs/execute_stage.vhd" \
+"../../../../srcs/alu/fa.vhd" \
+"../../../../srcs/inst_decode.vhd" \
+"../../../../srcs/inst_memory.vhd" \
+"../../../../srcs/memory_stage.vhd" \
+"../../../../srcs/alu/mult.vhd" \
+"../../../../srcs/register_file.vhd" \
+"../../../../srcs/alu/ripple_carry.vhd" \
+"../../../../srcs/alu/sllN.vhd" \
+"../../../../srcs/alu/sraN.vhd" \
+"../../../../srcs/alu/srlN.vhd" \
+"../../../../srcs/writeback_stage.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../srcs/inst_fetch.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../srcs/mips.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../srcs/mips_tb_a.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../proj1.srcs/sim_1/new/mips_tb_b.vhd" \
+
+# Do not sort compile order
+nosort

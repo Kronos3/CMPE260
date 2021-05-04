@@ -1,0 +1,76 @@
+% Author: Andrei Tumbar
+
+\documentclass[11pt]{article}
+    \title{\textbf{Homework 11}}
+    \author{Andrei Tumbar}
+    \date{04-14-2021}
+
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{float}
+\usetikzlibrary{arrows,automata}
+\addtolength{\topmargin}{-1.2in}
+\begin{document}
+\maketitle
+
+\section*{Exercise 34}
+\subsubsection*{a}
+
+The critical path on this circuit is from $A$ or $B$ on the first adder
+to $C_{out}$ followed by $C_{in}$ to $S$ on the second adder. The propagation
+delay of the flip-flops as well as their hold times are also taken into account.
+
+\begin{align*}
+T_{c} &= 35 + 30 + 25 + 20\\
+&= 35ps + 25ps + 20ps + 10ps = 110ps\\
+F &= 9.09 GHz
+\end{align*}
+
+\subsubsection*{b}
+
+\begin{align*}
+T_{c} &= 35 + 30 + 25 + 20 + t_{skew}\\
+1/8 GHz &= 125ps\\
+t_{skew} &= 125ps - 110ps = 15ps
+\end{align*}
+
+\subsubsection*{b}
+The flip flops have a minimum hold time of $10$ps. The earliest the output
+can begin to change is the sum of the $FF_{cd}$ and the $Adder_{min-cd}$
+which is:
+
+\begin{align*}
+CD_{min} &= 21ps + 15ps = 35ps
+\end{align*}
+
+Therefore the max skew for a holdtime violation is:
+
+\begin{align*}
+Skew_{max} &= 35ps - 10ps = 25ps
+\end{align*}
+
+\section*{Exercise 35}
+\subsubsection*{a}
+
+\begin{align*}
+40 MHz &= 25ns\\
+25ns &= 0.61x + 0.72ns + 0.53ns\\
+x &= 38.93 = 38 CLBs
+\end{align*}
+\subsubsection*{b}
+The hold time is 0ns so the maximum clock skew is the clock period of 25ns.
+
+\section*{Exercise 40}
+Given that the metastablity detector M has a low enough propagation time, this
+circuit would never produce a metastable result. This setup time would need to be
+low enough to satify this equation:
+
+\begin{align*}
+T_c \geq FF_{setup} + 2*FF_{prop} + M_{prop}
+\end{align*}
+
+The FF propagation time must be multiplied by 2 so that the D2 signal has time to
+reset when the metastable detector asynchronously resets the first flip-flop.
+
+\end{document}
